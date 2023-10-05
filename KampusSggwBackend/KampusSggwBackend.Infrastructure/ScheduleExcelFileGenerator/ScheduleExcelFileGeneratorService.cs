@@ -23,11 +23,7 @@ public class ScheduleExcelFileGeneratorService : IScheduleExcelFileGeneratorServ
         var scheduleNameCell = worksheet.Cells[1, 1];
         scheduleNameCell.Value = model.PlanName;
         scheduleNameCell.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-        scheduleNameCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-        scheduleNameCell.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
-        scheduleNameCell.Style.Border.Left.Style = ExcelBorderStyle.Medium;
-        scheduleNameCell.Style.Border.Right.Style = ExcelBorderStyle.Medium;
-        scheduleNameCell.Style.Border.Top.Style = ExcelBorderStyle.Medium;
+        scheduleNameCell.Style.Border.BorderAround(ExcelBorderStyle.Medium);
         scheduleNameCell.Value = model.PlanName;
 
         WriteDays(worksheet, model);
@@ -54,10 +50,7 @@ public class ScheduleExcelFileGeneratorService : IScheduleExcelFileGeneratorServ
             dayRow.Style.TextRotation = 180;
             dayRow.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
             dayRow.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-            dayRow.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
-            dayRow.Style.Border.Left.Style = ExcelBorderStyle.Medium;
-            dayRow.Style.Border.Right.Style = ExcelBorderStyle.Medium;
-            dayRow.Style.Border.Top.Style = ExcelBorderStyle.Medium;
+            dayRow.Style.Border.BorderAround(ExcelBorderStyle.Medium);
             dayRow.EntireRow.Height = 60;
 
             WriteHours(worksheet, currentRow);
@@ -120,10 +113,7 @@ public class ScheduleExcelFileGeneratorService : IScheduleExcelFileGeneratorServ
         groupsCell.Value = model.PlanName;
         groupsCell.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
         groupsCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-        groupsCell.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
-        groupsCell.Style.Border.Left.Style = ExcelBorderStyle.Medium;
-        groupsCell.Style.Border.Right.Style = ExcelBorderStyle.Medium;
-        groupsCell.Style.Border.Top.Style = ExcelBorderStyle.Medium;
+        groupsCell.Style.Border.BorderAround(ExcelBorderStyle.Medium);
         groupsCell.Value = "Grupy";
 
         for (int groupIndex = 0; groupIndex < model.Groups.Count; groupIndex++)
@@ -133,28 +123,22 @@ public class ScheduleExcelFileGeneratorService : IScheduleExcelFileGeneratorServ
             var groupNameCell = worksheet.Cells[startRow + groupIndex + 1, 2];
             groupNameCell.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
             groupNameCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-            groupNameCell.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
-            groupNameCell.Style.Border.Left.Style = ExcelBorderStyle.Medium;
-            groupNameCell.Style.Border.Right.Style = ExcelBorderStyle.Medium;
-            groupNameCell.Style.Border.Top.Style = ExcelBorderStyle.Medium;
+            groupNameCell.Style.Border.BorderAround(ExcelBorderStyle.Medium);
             groupNameCell.Value = group.Name;
 
             WriteGroupLessons(worksheet, model, group.Id, day, startRow + groupIndex + 1);
         }
     }
 
-    private void WriteEmptyRow(ExcelWorksheet worksheet, int rowIdenx)
+    private void WriteEmptyRow(ExcelWorksheet worksheet, int rowIndex)
     {
-        var emptyRow = worksheet.Cells[rowIdenx, 1, rowIdenx, worksheet.Dimension.Columns];
+        var emptyRow = worksheet.Cells[rowIndex, 1, rowIndex, worksheet.Dimension.Columns];
         emptyRow.Value = "";
         emptyRow.Merge = true;
         emptyRow.Style.Fill.PatternType = ExcelFillStyle.Solid;
         emptyRow.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(255, 204, 143));
         emptyRow.EntireRow.Height = 4;
-        emptyRow.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
-        emptyRow.Style.Border.Left.Style = ExcelBorderStyle.Medium;
-        emptyRow.Style.Border.Right.Style = ExcelBorderStyle.Medium;
-        emptyRow.Style.Border.Top.Style = ExcelBorderStyle.Medium;
+        emptyRow.Style.Border.BorderAround(ExcelBorderStyle.Medium);
     }
 
     private void WriteGroupLessons(ExcelWorksheet worksheet, ScheduleExcelFileModel model, Guid currentGroupId, DayOfWeek day, int rowIndex)
@@ -208,10 +192,7 @@ public class ScheduleExcelFileGeneratorService : IScheduleExcelFileGeneratorServ
             lessonCells.Merge = true;
             lessonCells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
             lessonCells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-            lessonCells.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
-            lessonCells.Style.Border.Left.Style = ExcelBorderStyle.Medium;
-            lessonCells.Style.Border.Right.Style = ExcelBorderStyle.Medium;
-            lessonCells.Style.Border.Top.Style = ExcelBorderStyle.Medium;
+            lessonCells.Style.Border.BorderAround(ExcelBorderStyle.Medium);
 
             if (lesson.Type == LessonType.Laboratory)
             {
@@ -231,31 +212,31 @@ public class ScheduleExcelFileGeneratorService : IScheduleExcelFileGeneratorServ
 
     private string LessonTypeToString(LessonType type)
     {
-        switch (type)
+        return type switch
         {
-            case LessonType.Laboratory: return "lab";
-            case LessonType.Lecture: return "w";
-            case LessonType.Exercise: return "ćw";
-            case LessonType.Project: return "proj";
-            case LessonType.Seminar: return "s";
-            case LessonType.Other: return "o";
-            default: throw new ArgumentException("Incorrect LessonType: " + type);
-        }
+            LessonType.Laboratory => "lab",
+            LessonType.Lecture => "w",
+            LessonType.Exercise => "ćw",
+            LessonType.Project => "proj",
+            LessonType.Seminar => "s",
+            LessonType.Other => "o",
+            _ => throw new ArgumentException("Incorrect LessonType: " + type),
+        };
     }
 
     private string DayOfWeekToString(DayOfWeek day)
     {
-        switch (day)
+        return day switch
         {
-            case DayOfWeek.Monday: return "Poniedziałek";
-            case DayOfWeek.Tuesday: return "Wtorek";
-            case DayOfWeek.Wednesday: return "Środa";
-            case DayOfWeek.Thursday: return "Czwartek";
-            case DayOfWeek.Friday: return "Piątek";
-            case DayOfWeek.Saturday: return "Sobota";
-            case DayOfWeek.Sunday: return "Niedziela";
-            default: throw new ArgumentException("Incorrect DayOfWeek: " + day);
-        }
+            DayOfWeek.Monday => "Poniedziałek",
+            DayOfWeek.Tuesday => "Wtorek",
+            DayOfWeek.Wednesday => "Środa",
+            DayOfWeek.Thursday => "Czwartek",
+            DayOfWeek.Friday => "Piątek",
+            DayOfWeek.Saturday => "Sobota",
+            DayOfWeek.Sunday => "Niedziela",
+            _ => throw new ArgumentException("Incorrect DayOfWeek: " + day),
+        };
     }
 
     private string GetNewLineCharacter()
