@@ -55,6 +55,9 @@ public class Startup
         app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
         app.UseHttpsRedirection();
 
+        app.UseStaticFiles();
+        app.UseRouting();
+
         app.UseAppSwagger();
         app.UseAnnWebApi();
 
