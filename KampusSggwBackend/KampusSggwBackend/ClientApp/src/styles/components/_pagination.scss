@@ -1,0 +1,18 @@
+@import "../helpers/colors";
+@import "../helpers/spacings";
+
+.pagination {
+  &_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: $spacing_2;
+  }
+}
+
+// Override bootstrap classes
+.page-item.active .page-link {
+  background: $dark-green !important;
+  border-color: $dark-green !important;
+  color: $white !important;
+}

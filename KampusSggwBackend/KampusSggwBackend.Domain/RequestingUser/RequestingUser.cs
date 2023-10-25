@@ -11,4 +11,8 @@ public class RequestingUser
     public string Email { get; set; }
     public UserLanguage Language { get; set; }
     public string DeviceToken { get; set; }
+    public bool IsEmailConfirmed { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
+    public DateTimeOffset UpdatedAt { get; set; }
+    public bool IsDeleted { get; set; }
 }

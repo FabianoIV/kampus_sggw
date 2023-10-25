@@ -39,7 +39,14 @@
   <ItemGroup>
     <Folder Include="ClientApp\src\app\core\errors\" />
     <Folder Include="ClientApp\src\app\core\interceptors\" />
-    <Folder Include="ClientApp\src\app\shared\" />
+    <Folder Include="ClientApp\src\app\core\guards\" />
+    <Folder Include="ClientApp\src\app\core\tokens\" />
+    <Folder Include="ClientApp\src\app\shared\models\" />
+    <Folder Include="ClientApp\src\app\shared\enums\" />
+    <Folder Include="ClientApp\src\app\shared\validators\" />
+    <Folder Include="ClientApp\src\app\shared\pipes\" />
+    <Folder Include="ClientApp\src\app\shared\others\" />
+    <Folder Include="Controllers\Lecturers\Results\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

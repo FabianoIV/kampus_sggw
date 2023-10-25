@@ -1,0 +1,37 @@
+@import "../../styles/helpers/colors";
+@import "../../styles/typography/texts";
+
+//Removes arrow after dropdown button
+.dropup .dropdown-toggle::after, .dropdown-toggle:after {
+  display:  none;
+}
+
+.dropdown {
+  cursor: pointer;
+
+  &-menu {
+    background-color: $light-blue;
+    padding: 1.6rem 0;
+    min-width: 20rem;
+  }
+}
+
+li, span {
+  &.dropdown-item {
+    font-size: $font-size-normal;
+    font-weight: 500;
+    padding: 1rem 2.1rem;
+    cursor: pointer;
+    white-space: normal; // wraps longer wordss
+
+    &:active, &:hover {
+      background-color: $dark-green;
+      outline: none;
+
+      > a {
+        // Override global links text color
+        color: $white !important;
+      }
+    }
+  }
+}

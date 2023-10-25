@@ -1,0 +1,13 @@
+<div class="form-control_wrapper ann-dropdown-wrapper">
+  <label class="has-float-label has-float-label--white">
+    <input *ngIf="!multiline" class="form-control white-background" [attr.disabled]="attrDisabledValue" [formControl]="control" placeholder=" ">
+    <textarea *ngIf="multiline" class="form-control white-background html-textarea" [rows]="multilineRowsCount" [attr.disabled]="attrDisabledValue" [formControl]="control" placeholder=" "></textarea>
+    <span>{{text}}</span>
+  </label>
+
+  <!-- Required validation -->
+  <div *ngIf="control.touched && control.errors?.required"
+       class="form-validation">
+    {{requiredErrorMessage}}
+  </div>
+</div>

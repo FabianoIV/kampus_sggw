@@ -1,0 +1,43 @@
+<div class="fit-content-card_wrapper" style="margin-top: 100px; margin-left: 10%; margin-right: 10%;">
+  <div class="card text-center">
+    <h5 class="fit-content-card_title">Logowanie</h5>
+    <form class="form-group">
+
+      <div class="form-control_wrapper">
+        <label class="has-float-label has-float-label--white">
+          <span>E-mail</span>
+          <input (keydown.enter)="signIn($event)" id="email" type="email" class="form-control" [formControl]="email" placeholder=" ">
+        </label>
+
+        <!--VALIDATION-->
+        <div *ngIf="email.touched && email.errors?.notEmpty"
+             class="form-validation">
+          Adres e-mail jest wymagany.
+        </div>
+      </div>
+
+      <div class="form-control_wrapper">
+        <label class="has-float-label has-float-label--white">
+          <span>Hasło</span>
+          <input (keydown.enter)="signIn($event)" id="password" type="password" class="form-control" [formControl]="password" placeholder=" ">
+        </label>
+
+        <!-- VALIDATION-->
+        <div *ngIf="password.touched && password.errors?.notEmpty"
+             class="form-validation">
+          Hasło jest wymagane.
+        </div>
+      </div>
+    </form>
+
+    <div class="fit-content-card_buttons-wrapper">
+      <button *ngIf="!loginLoading" class="btn-dark" (click)="signIn()">Zaloguj</button>
+      <button *ngIf="loginLoading" class="btn-dark" disabled>
+        <span class="spinner-border" role="status" aria-hidden="true"></span>
+        Ładowanie...
+      </button>
+    </div>
+
+    <div (click)="forgotYourPassword()" class="login_forgot-password">Zapomniałeś hasła?</div>
+  </div>
+</div>

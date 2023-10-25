@@ -1,0 +1,100 @@
+@import "../helpers/colors";
+@import "../typography/texts";
+@import "../helpers/border-radiuses";
+
+button {
+  color: $medium-blue;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:disabled {
+      opacity: .4;
+    }
+
+  & > .spinner-border {
+    // Add right margin between loading indicator and text in btn
+    margin-right: $spacing_1;
+  }
+}
+
+%btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .6rem 2rem;
+  font-weight: 500;
+  border: none;
+  height: 4rem;
+  width: 23rem;
+  text-align: center;
+}
+
+.btn-dark {
+  @extend %btn;
+  background: $dark-green;
+  color: $white;
+
+  &:hover, &:active, &:focus {
+    background-color: $light-green;
+    color: $dark-green;
+    border: 2px solid $dark-green;
+  }
+}
+
+.btn-text {
+  @extend %btn;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  font-weight: 700;
+  color: $medium-blue;
+  font-size: 1.3rem;
+  width: unset;
+  height: unset;
+  padding: 0;
+
+  & > img {
+    margin-right: $spacing_1;
+    width: 2rem;
+  }
+
+  &:hover, &:active, &:focus {
+    opacity: .9;
+    font-size: 1.35rem;
+  }
+}
+
+.btn-light {
+  @extend %btn;
+  background-color: $light-green;
+  color: $dark-green;
+
+  &:hover, &:active, &:focus {
+    background: $dark-green;
+    color: $white;
+    border: 2px solid $light-green;
+  }
+}
+
+.btn-red {
+  @extend %btn;
+  background-color:$dark-red;
+  color: $white;
+
+  &:hover, &:active, &:focus {
+    background: $mid-red;
+    color: $white;
+    border: 2px solid $dark-red;
+  }
+}
+
+.btn-small {
+  font-weight: bold;
+  width: 9rem;
+  height: 3rem;
+  padding: .6rem;
+  font-size: $font-size-small;
+}

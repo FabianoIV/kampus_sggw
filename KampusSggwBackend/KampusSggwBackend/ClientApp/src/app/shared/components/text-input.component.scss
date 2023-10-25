@@ -1,0 +1,51 @@
+/*@import "../../../../styles/helpers/spacings";
+@import "../../../../styles/helpers/colors";
+
+.create-or-update-tag {
+  &_buttons-wrapper {
+    display: flex;
+    margin-top: $spacing_3;
+
+    > button:first-child {
+      margin-right: $spacing_2;
+
+      @media (max-width: 750px) {
+        margin-right: 0;
+        margin-bottom: $spacing_1;
+      }
+    }
+
+    @media (max-width: 750px) {
+      flex-direction: column;
+    }
+  }
+}
+
+div.form-info {
+    font-size: 1rem;
+    opacity: 0.65;
+    font-weight: 500;
+}
+
+.has-float-label > input:disabled + span {
+  color: $medium-blue;
+  opacity: 1 !important;
+}
+
+.preview-image {
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.ann-dropdown-wrapper {
+  margin-bottom: 3.4rem;
+}
+
+.white-background {
+  background-color: white !important;
+}
+
+.html-textarea {
+  resize: both;
+}
+*/

@@ -1,0 +1,37 @@
+<h1>Nowy Wykładowca</h1>
+
+<div class="container mt-5">
+  <form>
+    <div class="form-group mb-3">
+      <label>Imię</label>
+      <input type="text" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Nazwisko</label>
+      <input type="text" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Email</label>
+      <input type="email" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Tytuł</label>
+      <select class="form-control">
+        <option *ngFor="let ad of academicDegrees" [value]="ad">{{ad}}</option>
+      </select>
+
+      <div *ngIf="" class="form-group mb-3">
+        <label>Niestandardowy Tytuł</label>
+        <input type="email" class="form-control" />
+      </div>
+    </div>
+
+    <div style="margin-top: 30px;" class="form-group mb-3 btn-group">
+      <button class="btn btn-success">Utwórz</button>
+      <a class="btn btn-danger" href="/lecturers/list">Powrót</a>
+    </div>
+  </form>
+</div>

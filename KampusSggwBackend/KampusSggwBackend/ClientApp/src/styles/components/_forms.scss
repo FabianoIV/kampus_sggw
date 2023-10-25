@@ -1,0 +1,215 @@
+@import "../helpers/spacings";
+@import "../helpers/colors";
+@import "../typography/texts";
+
+/*
+CUSTOM FLOATING LABELS INPUT & TEXTAREA & SELECT
+example usage:
+  <label class="has-float-label">
+    <input class="form-control" type="email" placeholder=" "/>
+    <span>E-mail</span>
+  </label>
+*/
+
+/*
+CUSTOM FLOATING LABEL FORM CONTROLS BACKGROUND COLORS
+*/
+@mixin formControlBackgroundColor($color: null) {
+  @if ($color != null) {
+    background: $color;
+  }
+  @else {
+  background: $white;
+}
+
+  height: 0.7rem;
+  top: 30%;
+  left: -.15rem;
+  right: -.1rem;
+  z-index: -1;
+  content: " ";
+  display: block;
+  position: absolute;
+}
+
+
+.has-float-label--blue label::after, .has-float-label--blue > span::after {
+  @include formControlBackgroundColor($light-blue);
+}
+
+.has-float-label--green label::after, .has-float-label--green > span::after {
+  @include formControlBackgroundColor($light-green);
+}
+
+.has-float-label--white label::after, .has-float-label--white > span::after {
+  @include formControlBackgroundColor();
+}
+
+// Clears bootstrap class
+.form-control:disabled, .form-control[readonly] {
+  background-color: transparent;
+}
+
+/*
+Overriding Bootstrap default styles and adding margins between form controls with validation included
+*/
+.form-group {
+  margin-bottom: 0;
+
+  > .form-control_wrapper {
+    margin-bottom: $spacing_3_4;
+
+    &:last-child {
+      margin-bottom: 0;
+    };
+  }
+}
+
+.form-control {
+  background: transparent;
+  border: 0.1rem solid $medium-blue;
+  height: 5.2rem;
+  width: 35rem;
+  color: $medium-blue;
+
+  &:focus {
+    outline: none;
+    border-color: $medium-blue;
+    background: transparent;
+    color: $medium-blue;
+  }
+}
+
+.has-float-label .form-control:placeholder-shown:not(:focus) + *, .form-control, .select > option {
+  font-size: $font-size-input;
+}
+
+// Disables resize and protects text to fall on the label
+textarea.form-control {
+  resize: none;
+  padding-top: 0.8rem;
+}
+
+/*
+BASED ON: https://github.com/tonystar/bootstrap-float-label &
+*/
+.has-float-label .form-control::-webkit-input-placeholder{opacity:1;-webkit-transition:all .2s;transition:all .2s;}
+.has-float-label .form-control::-moz-placeholder{opacity:1;transition:all .2s}
+.has-float-label .form-control:-ms-input-placeholder{opacity:1;transition:all .2s}
+.has-float-label .form-control::placeholder{opacity:1;-webkit-transition:all .2s;transition:all .2s}
+.has-float-label .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder{opacity:0}
+.has-float-label .form-control:placeholder-shown:not(:focus)::-moz-placeholder{opacity:0}
+.has-float-label .form-control:placeholder-shown:not(:focus):-ms-input-placeholder{opacity:0}
+.has-float-label .form-control:placeholder-shown:not(:focus)::placeholder{opacity:0}
+.has-float-label .form-control:placeholder-shown:not(:focus)+*{opacity:.5;top: 2rem}
+
+.input-group .has-float-label{-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;margin-bottom:0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
+.input-group .has-float-label .form-control{width:100%;border-radius:.4rem}
+.input-group .has-float-label:not(:last-child),.input-group .has-float-label:not(:last-child) .form-control{border-bottom-right-radius:0;border-top-right-radius:0;border-right:0}
+.input-group .has-float-label:not(:first-child),.input-group .has-float-label:not(:first-child) .form-control{border-bottom-left-radius:0;border-top-left-radius:0}
+
+.has-float-label {display: block; position: relative}
+
+.has-float-label label, .has-float-label > span {
+  font-weight: 500;
+  position: absolute;
+  cursor: text;
+  font-size: 85%;
+  opacity: 1;
+  transition: all .2s;
+  top: -.6rem;
+  left: 1.2rem;
+  z-index: 3;
+  line-height: 1;
+  padding: 0 0.1rem;
+}
+
+.has-float-label > input:disabled + :after, .has-float-label > input:disabled + span::after {
+  opacity: 0;
+}
+
+//Disabled input
+.has-float-label > input:disabled {
+  background-color: $medium-blue;
+  opacity: 0.5;
+
+  & + span {
+    color: white;
+    opacity: 1 !important;
+  }
+}
+
+ //Disabled select
+.has-float-label > select:disabled {
+  background-color: $medium-blue;
+  opacity: 0.5;
+  color: white;
+
+  & + span {
+    display: none;
+  }
+}
+
+// Custom search input styles
+.search {
+  &_input {
+    padding-right: $spacing-4;
+  }
+
+  &_icon {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.2rem;
+    width: 2.8rem;
+  }
+}
+
+// Validation errors styles
+.form-validation {
+  position: absolute;
+  font-size: $font-size-small;
+  color: $dark-red;
+  opacity: .65;
+  font-weight: 500;
+  margin-top: .4rem;
+}
+
+.form-validation-info {
+  position: absolute;
+  font-size: $font-size-small;
+  color: $medium-blue;
+  opacity: .65;
+  font-weight: 500;
+  margin-top: .4rem;
+}
+
+// Used to disable autofill background color change
+@-webkit-keyframes autofill {
+  0%,100% {
+    color: #666;
+    background: transparent;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+
+// Turns off number spinner in inputs of type number in Chrome
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+// Turns off number spinner in inputs of type number in Firefox
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+// Turns off red border around required inputs in Firefox
+:not(output):-moz-ui-invalid {
+  box-shadow: none;
+}

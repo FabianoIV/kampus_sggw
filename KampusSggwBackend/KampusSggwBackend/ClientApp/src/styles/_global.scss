@@ -1,0 +1,39 @@
+@import "helpers/colors";
+@import "typography/texts";
+
+html, body {
+  position: relative;
+  min-height: 100%;
+  letter-spacing: 0.1rem;
+  color: $medium-blue !important;
+  // Needed for easier REM usage
+  font-size: 62.5%;
+}
+
+body {
+  background-color: $light-blue !important;
+  font-size: $font-size-normal !important;
+  overscroll-behavior: none;
+}
+
+// Sets top and bottom margin of main container
+main.container {
+  position: relative;
+  // Sets padding from header
+  padding-top: 2.6rem;
+  // Calculate height with footer dimensions
+  min-height: calc(100vh - 13rem);
+}
+
+a {
+  color: $medium-blue !important;
+
+  &:hover, &:active {
+    // For not changing container size when setting font-weight: bold
+    text-shadow: .06rem 0 0 $medium-blue;
+    text-decoration: none !important;
+  }
+}
+
+
+

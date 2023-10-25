@@ -1,0 +1,64 @@
+@import "../../styles/helpers/colors";
+
+%status {
+  &-unanswered {
+    background-color: $dark-red;
+    color: $white;
+  }
+  &-answered {
+    background-color: $light-green;
+    color: $dark-green;
+  }
+  &-rejected {
+    background-color: $light-red;
+    color: $dark-red;
+  }
+}
+
+.status-box {
+  font-weight: 600;
+  padding: .7rem;
+  text-align: center;
+  border: none;
+  border-radius: 0.5rem;
+
+  &_status {
+    &-unanswered {
+      @extend %status-unanswered;
+    }
+    &-answered {
+      @extend %status-answered;
+    }
+    &-rejected {
+      @extend %status-rejected;
+    }
+  }
+
+  &_select {
+    // Centers the selected option
+    text-align-last: center;
+    // Needed to add padding
+    appearance: none;
+    padding-right: 2.5rem;
+    cursor: pointer;
+
+    background-repeat: no-repeat, repeat;
+    background-position: right .7rem top 50%, 0 0;
+    background-size: .9rem auto, 100%;
+
+    &_status {
+      &-unanswered {
+        @extend %status-unanswered;
+        background-image: url('/assets/icons/chevron-down-white.png');
+      }
+      &-answered {
+        @extend %status-answered;
+        background-image: url('/assets/icons/chevron-down-green.png');
+      }
+      &-rejected {
+        @extend %status-rejected;
+        background-image: url('/assets/icons/chevron-down-red.png');
+      }
+    }
+  }
+}

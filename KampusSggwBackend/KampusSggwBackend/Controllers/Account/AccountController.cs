@@ -1,6 +1,7 @@
 ﻿namespace KampusSggwBackend.Controllers.Account;
 
 using KampusSggwBackend.Controllers.Account.Parameters;
+using KampusSggwBackend.Controllers.Account.Results;
 using KampusSggwBackend.Domain.Exceptions;
 using KampusSggwBackend.Domain.User;
 using KampusSggwBackend.Infrastructure.SendGridEmailService;
@@ -45,6 +46,26 @@ public class AccountController : ControllerBase
     }
 
     // Methods
+    [Authorize]
+    [HttpGet("me")]
+    public async Task<ActionResult<UserAccountResult>> GetAccount()
+    {
+        var user = await requestingUserService.GetRequestingUser();
+
+        var result = new UserAccountResult()
+        {
+            Id = user.Id,
+            UserName = user.UserName,
+            Email = user.Email,
+            IsEmailConfirmed = user.IsEmailConfirmed,
+            CreatedAt = user.CreatedAt,
+            UpdatedAt = user.UpdatedAt,
+            IsDeleted = user.IsDeleted,
+        };
+
+        return Ok(result);
+    }
+
     [AllowAnonymous]
     [HttpPost("register")]
     public async Task<ActionResult> CreateAccount([FromBody] CreateAccountParam param)

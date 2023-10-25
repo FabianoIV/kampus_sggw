@@ -1,0 +1,50 @@
+@import "../helpers/colors";
+@import "../helpers/spacings";
+@import "../components/cards";
+
+table td, table th {
+  text-align: left;
+  color: $medium-blue;
+
+  // Needed for responisiveness
+  @media (max-width: 1200px) {
+    word-break: break-word;
+    hyphens: auto;
+  }
+}
+
+table td {
+  @media (max-width: 770px) {
+    max-width: 4rem;
+  }
+}
+
+table th {
+  width: 10rem;
+}
+
+
+.table {
+
+  &_big-screen {
+    @media (max-width: 770px) {
+      display: none;
+    }
+  }
+
+  &_small-screen {
+    display: none;
+
+    &_card {
+      @extend %card;
+      margin-bottom: $spacing_2;
+      min-width: 375px;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    @media (max-width: 770px) {
+      display: block;
+    }
+  }
+}

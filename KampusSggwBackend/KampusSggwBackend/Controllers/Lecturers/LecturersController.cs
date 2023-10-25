@@ -1,5 +1,7 @@
 ﻿namespace KampusSggwBackend.Controllers.Lecturers;
 
+using KampusSggwBackend.Controllers.Lecturers.Parameters;
+using KampusSggwBackend.Domain.Schedule;
 using KampusSggwBackend.Infrastructure.ScheduleService.Repositories.Lecturers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +23,7 @@ public class LecturersController : ControllerBase
 
     // Methods
     [HttpGet]
-    public ActionResult GetLecturers()
+    public ActionResult GetAll()
     {
         var lecturers = lecturersRepository.GetAll();
 
@@ -29,10 +31,27 @@ public class LecturersController : ControllerBase
     }
 
     [HttpGet("{lecturerId}")]
-    public ActionResult GetLecturer(Guid lecturerId)
+    public ActionResult Get([FromRoute] Guid lecturerId)
     {
         var lecturer = lecturersRepository.Get(lecturerId);
 
         return Ok(lecturer);
     }
+
+    [HttpPost]
+    public ActionResult Create([FromBody] CreateLecturerParam param)
+    {
+        var newLecturer = new Lecturer()
+        {
+            FirstName = param.FirstName,
+            Surname = param.Surname,
+            Email = param.Email,
+            AcademicDegree = param.AcademicDegree,
+        };
+
+        lecturersRepository.Create(newLecturer);
+
+        return Ok();
+    }
+
 }

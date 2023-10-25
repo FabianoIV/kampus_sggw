@@ -45,6 +45,10 @@ public class RequestingUserService : IRequestingUserService
             Email = user.Email,
             Language = user.Language,
             DeviceToken = user.DeviceToken,
+            IsEmailConfirmed = user.EmailConfirmed,
+            CreatedAt = user.CreatedAt,
+            UpdatedAt = user.UpdatedAt,
+            IsDeleted = false,
         };
 
         return requestingUser;

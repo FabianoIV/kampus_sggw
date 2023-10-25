@@ -1,0 +1,47 @@
+@import "../../styles/helpers/spacings";
+@import "../../styles/helpers/colors";
+@import "../../styles/components/cards";
+@import "../../styles/typography/texts";
+
+.filters {
+  &_card {
+    @extend %card;
+    margin-bottom: $spacing_2;
+    background-color: $light-green;
+
+    &_form {
+
+      &_wrapper {
+        display: flex;
+        flex-wrap: wrap;
+
+        > .form-control_wrapper {
+          margin-right: $spacing_2;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    &_title {
+      font-size: $font-size-small-heading;
+      margin-right: $spacing_1;
+      margin-bottom: .5rem;
+
+      &_reset {
+
+        &_icon {
+          margin-right: .5rem;
+          width: 1.6rem;
+        }
+      }
+
+      &_wrapper {
+        display: flex;
+        margin-bottom: $spacing_2;
+      }
+    }
+  }
+}

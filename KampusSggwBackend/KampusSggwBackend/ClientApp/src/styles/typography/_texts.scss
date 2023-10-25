@@ -1,0 +1,14 @@
+@import "../helpers/spacings";
+
+$font-size-small: 1rem;
+$font-size-normal: 1.4rem;
+$font-size-small-heading: 2.2rem;
+$font-size-big-heading: 3rem;
+$font-size-input: 1.2rem;
+
+.heading {
+  &_big {
+    margin-bottom: $spacing_2_6;
+    font-size: $font-size-big-heading;
+  }
+}
