@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using KampusSggwBackend.Infrastructure.ScheduleService;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 public class Startup
 {
@@ -62,5 +63,15 @@ public class Startup
         app.UseAnnWebApi();
 
         app.InitializeDatabase();
+
+        app.UseSpa(spa =>
+        {
+            spa.Options.SourcePath = "ClientApp";
+
+            if (env.IsDevelopment())
+            {
+                spa.UseAngularCliServer(npmScript: "start");
+            }
+        });
     }
 }
