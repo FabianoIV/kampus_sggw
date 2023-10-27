@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'create',
     component: CreateOrUpdateLecturerComponent,
   },
+  {
+    path: ':lecturerId/edit',
+    component: CreateOrUpdateLecturerComponent,
+  },
 ];
 
 @NgModule({

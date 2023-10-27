@@ -27,6 +27,7 @@ export class LecturersListComponent implements OnInit {
     private modalService: NgbModal,
     public lecturerService: LecturerService
   ) {
+    this.lecturerService.updateLecturersList();
     this.lecturers$ = lecturerService.lecturers$;
     this.total$ = lecturerService.total$;
   }
@@ -46,5 +47,10 @@ export class LecturersListComponent implements OnInit {
 
     this.lecturerService.sortColumn = column;
     this.lecturerService.sortDirection = direction;
+  }
+
+  public async removeLecturer(lecturerId: string): Promise<void> {
+    await this.lecturerService.deleteLecturer(lecturerId);
+    this.lecturerService.updateLecturersList();
   }
 }

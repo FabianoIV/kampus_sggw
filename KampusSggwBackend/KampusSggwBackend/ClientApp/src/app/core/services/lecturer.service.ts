@@ -39,7 +39,8 @@ function matches(lecturer: Lecturer, term: string, pipe: PipeTransform) {
   return (
     lecturer.firstName.toLowerCase().includes(term.toLowerCase()) ||
     pipe.transform(lecturer.surname).includes(term) ||
-    pipe.transform(lecturer.email).includes(term)
+    pipe.transform(lecturer.email).includes(term) ||
+    pipe.transform(lecturer.academicDegree).includes(term)
   );
 }
 
@@ -102,6 +103,11 @@ export class LecturerService {
     this._search$.next();
   }
 
+  public async updateLecturersList(): Promise<void> {
+    this.rawLecturers = (await this.getLecturers())!;
+    this._search$.next();
+  }
+
   private _search(): Observable<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
@@ -128,13 +134,37 @@ export class LecturerService {
 
   public async getLecturer(lecturerId: string): Promise<Lecturer | undefined> {
     const url = `${this.apiUrl}/api/Lecturers/${lecturerId}`;
-    var result = this.http.get<Lecturer>(url).toPromise();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.appLocalStorage.accessToken}`,
+    });
+    var result = this.http.get<Lecturer>(url, { headers }).toPromise();
     return result;
   }
 
-  public async createLecturer(): Promise<Lecturer[] | undefined> {
+  public async createLecturer(lecturer: Lecturer): Promise<void> {
     const url = `${this.apiUrl}/api/Lecturers`;
-    var result = await this.http.get<Lecturer[]>(url).toPromise();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.appLocalStorage.accessToken}`,
+    });
+    var result = await this.http.post<void>(url, lecturer, { headers }).toPromise();
+    return result;
+  }
+
+  public async updateLecturer(lecturer: Lecturer): Promise<void> {
+    const url = `${this.apiUrl}/api/Lecturers`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.appLocalStorage.accessToken}`,
+    });
+    var result = await this.http.put<void>(url, lecturer, { headers }).toPromise();
+    return result;
+  }
+
+  public async deleteLecturer(lecturerId: string): Promise<void> {
+    const url = `${this.apiUrl}/api/Lecturers/${lecturerId}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.appLocalStorage.accessToken}`,
+    });
+    var result = await this.http.delete<void>(url, { headers }).toPromise();
     return result;
   }
 }

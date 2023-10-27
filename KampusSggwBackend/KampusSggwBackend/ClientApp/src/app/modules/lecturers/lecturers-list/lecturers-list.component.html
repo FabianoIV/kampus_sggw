@@ -18,7 +18,6 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <!--<th scope="col">Id</th>-->
         <th scope="col" sortable="academicDegree" (sort)="onSort($event)">Degree</th>
         <th scope="col" sortable="firstName" (sort)="onSort($event)">First Name</th>
         <th scope="col" sortable="surname" (sort)="onSort($event)">Surname</th>
@@ -28,15 +27,22 @@
     </thead>
     <tbody>
       <tr *ngFor="let lecturer of lecturers$ | async">
-        <!--<td scope="row">{{ lecturer.id }}</td>-->
-        <td scope="row" sortable="academicDegree" (sort)="onSort($any($event))">{{ lecturer.academicDegree }}</td>
-        <td scope="row" sortable="firstName" (sort)="onSort($any($event))">{{ lecturer.firstName }}</td>
-        <td scope="row" sortable="surname" (sort)="onSort($any($event))">{{ lecturer.surname }}</td>
-        <td scope="row" sortable="email" (sort)="onSort($any($event))">{{ lecturer.email }}</td>
-        <td scope="row" width="50px">
+        <td scope="row" sortable="academicDegree" (sort)="onSort($any($event))">
+          <ngb-highlight [result]="lecturer.academicDegree" [term]="lecturerService.searchTerm"></ngb-highlight>
+        </td>
+        <td scope="row" sortable="firstName" (sort)="onSort($any($event))">
+          <ngb-highlight [result]="lecturer.firstName" [term]="lecturerService.searchTerm"></ngb-highlight>
+        </td>
+        <td scope="row" sortable="surname" (sort)="onSort($any($event))">
+          <ngb-highlight [result]="lecturer.surname" [term]="lecturerService.searchTerm"></ngb-highlight>
+        </td>
+        <td scope="row" sortable="email" (sort)="onSort($any($event))">
+          <ngb-highlight [result]="lecturer.email" [term]="lecturerService.searchTerm"></ngb-highlight>
+        </td>
+        <td scope="row">
           <div class="btn-group">
-            <button class="btn btn-success">Edytuj</button>
-            <button class="btn btn-danger">Usuń</button>
+            <a href="/lecturers/{{ lecturer.id }}/edit" class="btn btn-success">Edytuj</a>
+            <a class="btn btn-danger" (click)="removeLecturer(lecturer.id)">Usuń</a>
           </div>
         </td>
       </tr>

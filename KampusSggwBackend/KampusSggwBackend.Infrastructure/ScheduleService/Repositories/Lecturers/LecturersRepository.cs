@@ -27,7 +27,18 @@ public class LecturersRepository : ILecturersRepository
 
     public void Create(Lecturer lecturer)
     {
+        lecturer.Created = DateTime.UtcNow;
+        lecturer.Updated = DateTime.UtcNow;
+
         dbContext.Lecturers.Add(lecturer);
+        dbContext.SaveChanges();
+    }
+
+    public void Update(Lecturer lecturer)
+    {
+        lecturer.Updated = DateTime.UtcNow;
+
+        dbContext.Lecturers.Update(lecturer);
         dbContext.SaveChanges();
     }
 

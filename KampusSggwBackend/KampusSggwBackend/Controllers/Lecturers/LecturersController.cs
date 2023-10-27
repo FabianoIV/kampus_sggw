@@ -6,7 +6,7 @@ using KampusSggwBackend.Infrastructure.ScheduleService.Repositories.Lecturers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-[AllowAnonymous]
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class LecturersController : ControllerBase
@@ -54,4 +54,31 @@ public class LecturersController : ControllerBase
         return Ok();
     }
 
+    [HttpPut]
+    public ActionResult Update([FromBody] UpdateLecturerParam param)
+    {
+        var lecturer = lecturersRepository.Get(param.Id);
+
+        if (lecturer == null)
+        {
+            return NotFound();
+        }
+
+        lecturer.FirstName = param.FirstName;
+        lecturer.Surname = param.Surname;
+        lecturer.Email = param.Email;
+        lecturer.AcademicDegree = param.AcademicDegree;
+
+        lecturersRepository.Update(lecturer);
+
+        return Ok();
+    }
+
+
+    [HttpDelete("{lecturerId}")]
+    public ActionResult Delete([FromRoute] Guid lecturerId)
+    {
+        lecturersRepository.Delete(lecturerId);
+        return Ok();
+    }
 }

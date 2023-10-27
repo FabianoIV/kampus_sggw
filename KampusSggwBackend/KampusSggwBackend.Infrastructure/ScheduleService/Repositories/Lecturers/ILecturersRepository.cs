@@ -8,5 +8,6 @@ public interface ILecturersRepository
     List<Lecturer> GetAll();
     Lecturer Get(Guid id);
     void Create(Lecturer lecturer);
+    void Update(Lecturer lecturer);
     void Delete(Guid id);
 }
